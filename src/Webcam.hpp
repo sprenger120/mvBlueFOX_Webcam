@@ -5,6 +5,7 @@
 #include "Undistortion.hpp"
 #include <linux/videodev2.h>
 #include <chrono>
+#include "FaceDetector.hpp"
 
 using namespace std::chrono;
 
@@ -28,6 +29,17 @@ private:
     v4l2_format _videoFormat;
     steady_clock::time_point _lastFrame;
     Undistortion _undistortion;
+    FaceDetector _faceDetector;
+
+    double faceX = 0;
+    double faceY = 0;
+    double faceSize = 250;
+    cv::Point lastFaceDetectionResult;
+    bool firstDetection{false};
+    double avg(double value, double newSample);
+
+    static constexpr int detectionWaitFrames{3};
+    int frameCounter{0};
 
     //std::thread _writeThread;
     //bool _threadShouldRun{true};

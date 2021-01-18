@@ -27,7 +27,7 @@ add_executable(webcam
         src/Webcam.hpp
         src/FileHandleWrapper.cpp
         src/FileHandleWrapper.hpp
-        src/Undistortion.cpp src/Undistortion.hpp)
+        src/Undistortion.cpp src/Undistortion.hpp src/FaceDetector.cpp src/FaceDetector.hpp)
 
 
 target_include_directories(webcam PUBLIC
