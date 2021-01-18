@@ -37,16 +37,11 @@ Webcam::Webcam(const std::string &device, unsigned int frameWidth, unsigned int 
     {
         throw std::runtime_error("cannot setup video device");
     }
-
-    //_writeThread = std::thread(&Webcam::threadMain, this);
 }
 
-Webcam::~Webcam() {
-    //   _threadShouldRun = false;
-    //  _writeThread.join();
-}
 void Webcam::publish(int imageWidth, int imageHeight, int channelCount, void *rawData) {
-    if (imageWidth < 1 || imageHeight < 1 || (!(channelCount == 1 || channelCount == 3)) || rawData == nullptr)
+    if (imageWidth != Undistortion::cameraWidth || imageHeight != Undistortion::cameraHeight
+        || (!(channelCount == 1 || channelCount == 3)) || rawData == nullptr)
     {
         throw std::invalid_argument("illegal input");
     }

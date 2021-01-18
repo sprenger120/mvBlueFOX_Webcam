@@ -13,7 +13,6 @@ namespace webcam {
 class Webcam {
 public:
     Webcam(const std::string& device, unsigned int frameWidth, unsigned int frameHeight);
-    ~Webcam();
 
     Webcam(const Webcam &) = delete;
     Webcam(Webcam &&) = delete;
