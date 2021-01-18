@@ -52,17 +52,21 @@ void Webcam::publish(int imageWidth, int imageHeight, int channelCount, void *ra
     }
 
     // incoming picture to RGBA
-    cv::Mat bgraImg;
+    cv::Mat bgraImgDistorted;
     if (channelCount == 1)
     {
         cv::Mat grayImage(imageHeight, imageWidth, CV_8UC1, rawData);
-        cv::cvtColor(grayImage, bgraImg, cv::COLOR_GRAY2BGRA);
+        cv::cvtColor(grayImage, bgraImgDistorted, cv::COLOR_GRAY2BGRA);
     }
     else
     {
         cv::Mat bgrImg(imageHeight, imageWidth, CV_8UC3, rawData);
-        cv::cvtColor(bgrImg, bgraImg, cv::COLOR_RGB2BGRA);
+        cv::cvtColor(bgrImg, bgraImgDistorted, cv::COLOR_RGB2BGRA);
     }
+
+    // undistort
+    cv::Mat bgraImg(bgraImgDistorted.size(), bgraImgDistorted.type());
+    _undistortion.undistortImage(bgraImgDistorted, bgraImg);
 
     //cv::imshow("aa", bgraImg);
     //cv::waitKey(0);
@@ -77,13 +81,13 @@ void Webcam::publish(int imageWidth, int imageHeight, int channelCount, void *ra
     double fps = 1.0 / (static_cast<double>(millis) / 1000.0);
 
     std::stringstream ss;
-    ss<< "FPS: "<<std::fixed<< std::setprecision(1)<<fps;
+    ss << "FPS: " << std::fixed << std::setprecision(1) << fps;
     cv::putText(bgraImg_OutputSize,
-        ss.str(),
-        cv::Point(30,100),
-        cv::HersheyFonts::FONT_HERSHEY_PLAIN,
-        1,
-        cv::Scalar(255, 0, 255, 255));
+                ss.str(),
+                cv::Point(30, 100),
+                cv::HersheyFonts::FONT_HERSHEY_PLAIN,
+                1,
+                cv::Scalar(255, 0, 255, 255));
 
     // convert RGBA to ARGB as I didn't find a RGBA to YUV422 function and openCV doesn't
     // have an ARGB encoding except when converting from beyer which we don't

@@ -22,7 +22,12 @@ add_executable(webcam
         src/Camera.cpp
         src/Camera.hpp
         src/CameraHelper.hpp
-        src/CameraHelper.cpp src/Webcam.cpp src/Webcam.hpp src/FileHandleWrapper.cpp src/FileHandleWrapper.hpp)
+        src/CameraHelper.cpp
+        src/Webcam.cpp
+        src/Webcam.hpp
+        src/FileHandleWrapper.cpp
+        src/FileHandleWrapper.hpp
+        src/Undistortion.cpp src/Undistortion.hpp)
 
 
 target_include_directories(webcam PUBLIC
@@ -34,6 +39,7 @@ target_link_libraries(webcam
         pthread
         rt
         yuv
+        jpeg
         ${mvIMPACT_Acquire_LIBRARIES}
         ${OpenCV_LIBS}
         )

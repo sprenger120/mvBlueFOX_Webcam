@@ -2,6 +2,7 @@
 #include <string>
 #include <thread>
 #include "FileHandleWrapper.hpp"
+#include "Undistortion.hpp"
 #include <linux/videodev2.h>
 #include <chrono>
 
@@ -27,6 +28,7 @@ private:
     FileHandleWrapper _dev_fd;
     v4l2_format _videoFormat;
     steady_clock::time_point _lastFrame;
+    Undistortion _undistortion;
 
     //std::thread _writeThread;
     //bool _threadShouldRun{true};
