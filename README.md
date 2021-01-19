@@ -11,8 +11,8 @@ This project is done for Linux and I have no intentions to port it. You'll the f
 - build-essential 
 - libopencv-dev major version 4
 - libjpeg-dev
-- (libyuv)[https://chromium.googlesource.com/libyuv/libyuv] (compiled, installed from the repo)
-- (mvImpact Acquire)[https://www.matrix-vision.com/USB2.0-industriekamera-mvbluefox.html] (installed from package)
+- [libyuv](https://chromium.googlesource.com/libyuv/libyuv) (compiled, installed from the repo)
+- [mvImpact Acquire](https://www.matrix-vision.com/USB2.0-industriekamera-mvbluefox.html) (installed from package)
 - v4l2loopback-dkms, v4l2loopback-utils
 
 To compile do
