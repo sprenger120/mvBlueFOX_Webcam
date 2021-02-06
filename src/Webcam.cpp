@@ -62,7 +62,7 @@ void Webcam::publish(int imageWidth, int imageHeight, int channelCount, void *ra
     }
 
     // undistort
-    cv::Mat bgraImg(bgraImgDistorted.size(), bgraImgDistorted.type());
+    /*cv::Mat bgraImg(bgraImgDistorted.size(), bgraImgDistorted.type());
     _undistortion.undistortImage(bgraImgDistorted, bgraImg);
     // undistortion creates black areas in the top and bottom, create region of interest without those
     cv::Mat bgraROI(bgraImg, cv::Rect(0, 40, _frameWidth, 400));
@@ -117,10 +117,10 @@ void Webcam::publish(int imageWidth, int imageHeight, int channelCount, void *ra
 
     //cv::imshow("aa", bgraROI);
     //cv::waitKey(0);
-
+*/
     // Resize to fit video target
     cv::Mat bgraImg_OutputSize;
-    cv::resize(sharpened, bgraImg_OutputSize, cv::Size(_frameWidth, _frameHeight));
+    cv::resize(bgraImgDistorted, bgraImg_OutputSize, cv::Size(_frameWidth, _frameHeight));
 
     /*auto deltaT{steady_clock::now() - _lastFrame};
     auto millis{duration_cast<milliseconds>(deltaT).count()};

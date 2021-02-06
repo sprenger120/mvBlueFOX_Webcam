@@ -20,8 +20,8 @@ private:
     //std::thread _aquisitionThread;
     //bool _threadShouldRun{true};
 
-    void aquisitionCallback(std::shared_ptr<Request> pRequest);
-    static void AquisitionCallbackStatic(std::shared_ptr<Request> request, Camera &context);
+    void aquisitionCallback(std::shared_ptr<Request>& pRequest);
+    static void AquisitionCallbackStatic(std::shared_ptr<Request>& request, Camera &context);
 
     std::unique_ptr<RequestProvider> _requestProvider;
     std::unique_ptr<FunctionInterface> _functionInterface;

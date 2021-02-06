@@ -81,7 +81,7 @@ Camera::Camera(Device *dev) : _dev(dev), _webcam("/dev/video0", 640, 480) {
     _requestProvider->acquisitionStart(AquisitionCallbackStatic, std::ref(*this));
 
 }
-void Camera::aquisitionCallback(std::shared_ptr<Request> request) {
+void Camera::aquisitionCallback(std::shared_ptr<Request>& request) {
     if (request->isOK())
     {
         _webcam.publish(request->imageWidth.read(),
@@ -95,7 +95,7 @@ void Camera::aquisitionCallback(std::shared_ptr<Request> request) {
     }
 }
 
-void Camera::AquisitionCallbackStatic(std::shared_ptr<Request> request, Camera &context) {
+void Camera::AquisitionCallbackStatic(std::shared_ptr<Request>& request, Camera &context) {
     context.aquisitionCallback(request);
 }
 
